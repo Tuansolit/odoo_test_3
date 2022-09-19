@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="module_test_3" model="ir.module.category">
+        <field name="name">Test_3</field>
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="module_test_3_category_user" model="ir.module.category">
+        <field name="name">Test_3</field>
+        <field name="parent_id" ref="module_test_3"/>
+        <field name="description">Helps you handle application</field>
+        <field name="sequence">10</field>
+    </record>
+    <record id="sale_group_user" model="res.groups">
+        <field name="name">User</field>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        <field name="category_id" ref="module_test_3_category_user"/>
+        <field name="comment">Users belong to this group can use this application</field>
+    </record>
+
+    <record id="group_advanced_sale" model="res.groups">
+        <field name="name">Administrator</field>
+        <field name="implied_ids" eval="[(4, ref('sale_group_user'))]"/>
+        <field name="category_id" ref="module_test_3_category_user"/>
+        <field name="users" eval="[(4, ref('base.user_root')),(4, ref('base.user_admin'))]"/>
+        <field name="comment">Users belong to this group can control this application</field>
+    </record>
+</odoo>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id='test_3_business_plan_form' model='ir.ui.view'>
+        <field name='name'>Business plan wizard form view</field>
+        <field name='model'>plan.sale.order</field>
+        <field name='arch' type='xml'>
+            <form string="Business plan">
+                <header>
+                    <button name="send_approve" string="Send Approve"
+                            type="object" class="btn-primary"/>
+                    <field name="state" widget="statusbar" statusbar_visible="new,process,approved,reject"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name='name' attrs="{'readonly': [('state', '=', ('process'))]}"/>
+                    </group>
+                    <group>
+                        <field name='order_id' attrs="{'readonly': [('state', '=', ('process'))]}"/>
+                    </group>
+                    <group>
+                        <field name="business_plan_info" attrs="{'readonly': [('state', '=', ('process'))]}"/>
+                    </group>
+                    <notebook>
+                        <page string="Approver Lines" name="order_lines">
+                            <field
+                                    name="plan_line"
+                                    widget="section_and_note_one2many"
+                                    mode="tree,kanban"
+                                    attrs="{'readonly': [('state', 'in', ('done','cancel'))]}"
+                            >
+                                <tree
+                                        string="Sales Order Lines"
+                                        editable="bottom"
+                                >
+                                    <control>
+                                        <create name="add_product_control" string="Add a approver"/>
+                                    </control>
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="state_plan"/>
+                                    <field name="check_user"/>
+                                    <button name="doapprove" string="Approve" type="object" class="oe_highlight"
+                                            attrs="{'invisible': [('check_user', '=', False)]}"/>
+                                    <button name="doreject" string="Reject" type="object" class="oe_highlight"
+                                            attrs="{'invisible': [('check_user', '=', False)]}"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <footer>
+
+                </footer>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+</odoo>
