@@ -31,8 +31,3 @@ class PlanSaleOrder(models.Model):
         self.write({'state': 'process'})
         self.order_id.write({'plan_id': self.id})
 
-    # @api.model
-    # def create(self, vals):
-    #     cashboxes = super(PlanSaleOrder, self).create(vals)
-    #     self.order_id.write({'plan_id': self.id})
-    #     return cashboxes
