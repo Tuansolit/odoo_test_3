@@ -4,8 +4,7 @@ from odoo.tools.translate import _
 
 class PlanSaleOrderLine(models.Model):
     _name = 'plan.sale.order.line'
-    # _inherit = 'sale.order.line'
-    # _inherit = ['mail.thread', 'mail.activity.mixin']
+    _inherit = ['mail.thread', 'mail.activity.mixin']
 
     user_id = fields.Many2one('res.users')
     state_plan = fields.Selection(
