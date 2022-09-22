@@ -21,9 +21,12 @@ class PlanSaleOrder(models.Model):
                                 auto_join=True)
 
     def send_approve(self):
+        partner_ids = []
+        for line in self.plan_line:
+            partner_ids.append(line.user_id.partner_id.id)
         self.message_post(body=_('Check it out!'),
-                          message_type='comment',
-                          subtype_xmlid='mail.mt_note',
+                          message_type='notification',
+                          partner_ids=partner_ids
                           )
         self.write({'state': 'process'})
         self.order_id.write({'plan_id': self.id})

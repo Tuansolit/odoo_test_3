@@ -22,10 +22,10 @@ class SaleOrderInherit(models.Model):
             'target': 'current',
             'context': {'default_order_id': self.id}
         }
-        self.plan_id = self.env['plan.sale.order'].search([('order_id', '=', self.id)])
 
     def check_business_plan(self):
-        if not self.plan_id:
+        plan_id = self.env['plan.sale.order'].search([('order_id', '=', self.id)])
+        if not plan_id:
             raise ValidationError("No business plan!")
 
 

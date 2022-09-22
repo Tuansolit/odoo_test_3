@@ -37,12 +37,12 @@
                                         <create name="add_product_control" string="Add a approver"/>
                                     </control>
                                     <field name="sequence" widget="handle"/>
-                                    <field name="name"/>
+                                    <field name="user_id"/>
                                     <field name="state_plan"/>
                                     <field name="check_user"/>
-                                    <button name="doapprove" string="Approve" type="object" class="oe_highlight"
+                                    <button name="do_approve" string="Approve" type="object" class="oe_highlight"
                                             attrs="{'invisible': [('check_user', '=', False)]}"/>
-                                    <button name="doreject" string="Reject" type="object" class="oe_highlight"
+                                    <button name="do_reject" string="Reject" type="object" class="oe_highlight"
                                             attrs="{'invisible': [('check_user', '=', False)]}"/>
                                 </tree>
                             </field>
