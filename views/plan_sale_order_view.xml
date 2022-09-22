@@ -38,7 +38,7 @@
                                     </control>
                                     <field name="sequence" widget="handle"/>
                                     <field name="user_id"/>
-                                    <field name="state_plan"/>
+                                    <field name="state_plan" attrs="{'readonly': [('check_user', '=', False)]}"/>
                                     <field name="check_user"/>
                                     <button name="do_approve" string="Approve" type="object" class="oe_highlight"
                                             attrs="{'invisible': [('check_user', '=', False)]}"/>
