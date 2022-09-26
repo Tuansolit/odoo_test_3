@@ -13,8 +13,7 @@ Description related to library.
     'depends': ['base', 'account', 'sale', 'sale_management', 'product'],
     'data': ['security/ir.model.access.csv',
              'views/plan_sale_order_view.xml',
-             'views/sale_order.xml',
-             'views/plan_sale_order_tree_view.xml'
+             'views/sale_order.xml'
              ],
     'demo': ['data/demo.xml'],
 }

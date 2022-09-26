@@ -16,7 +16,7 @@
                         <field name='name' attrs="{'readonly': [('state', '=', ('process'))]}"/>
                     </group>
                     <group>
-                        <field name='order_id' attrs="{'readonly': [('state', '=', ('process'))]}"/>
+                        <field name='order_id' attrs="{'readonly': [('state', '!=', ('new'))]}"/>
                     </group>
                     <group>
                         <field name="business_plan_info" attrs="{'readonly': [('state', '=', ('process'))]}"/>
@@ -39,11 +39,11 @@
                                     <field name="sequence" widget="handle"/>
                                     <field name="user_id"/>
                                     <field name="state_plan" attrs="{'readonly': [('check_user', '=', False)]}"/>
-                                    <field name="check_user"/>
+                                    <field name="check_user" invisible="1"/>
                                     <button name="do_approve" string="Approve" type="object" class="oe_highlight"
-                                            attrs="{'invisible': [('check_user', '=', False)]}"/>
+                                            attrs="{'invisible': ['|',('check_user', '=', False), ('state_plan', '=', 'approved')]}"/>
                                     <button name="do_reject" string="Reject" type="object" class="oe_highlight"
-                                            attrs="{'invisible': [('check_user', '=', False)]}"/>
+                                            attrs="{'invisible': ['|',('check_user', '=', False), ('state_plan', '=', 'reject')]}"/>
                                 </tree>
                             </field>
                         </page>
@@ -58,6 +58,27 @@
                     <field name="message_ids"/>
                 </div>
             </form>
+        </field>
+    </record>
+
+    <record id='test_3_plan_display_action' model='ir.actions.act_window'>
+        <field name="name">Plan</field>
+        <field name="res_model">plan.sale.order</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Plan" id="plan_menu" parent="sale.sale_menu_root"
+              action="test_3_plan_display_action"/>
+
+    <record id="test_3_plan_view_tree" model="ir.ui.view">
+        <field name="name">plan</field>
+        <field name="model">plan.sale.order</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="order_id"/>
+                <field name="name"/>
+                <field name="create_uid"/>
+            </tree>
         </field>
     </record>
 
