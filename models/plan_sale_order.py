@@ -1,6 +1,8 @@
 from odoo import fields, models, api
+from odoo.fields import Datetime
 from odoo.tools.translate import _
 from odoo.exceptions import UserError
+from datetime import datetime, date, timedelta
 
 
 class PlanSaleOrder(models.Model):
@@ -28,6 +30,16 @@ class PlanSaleOrder(models.Model):
             message_type='notification',
             partner_ids=partner_ids
         )
+        for rec in self:
+            for line in rec.plan_line:
+                self.env['mail.activity'].create({
+                    'summary': 'Check plan',
+                    'date_deadline': date.today() + timedelta(days=3),
+                    'activity_type_id': self.env.ref('mail.mail_activity_data_email').id,
+                    'user_id': line.user_id.id,
+                    'res_model_id': self.env['ir.model']._get_id('plan.sale.order'),
+                    'res_id': rec.id
+                })
         self.write({'state': 'process'})
         self.order_id.write({'plan_id': self.id})
 
@@ -39,3 +51,11 @@ class PlanSaleOrder(models.Model):
                 if 'business_plan_info' in values:
                     raise UserError('You are not allowed to modify ''name and business_plan_info')
         return super(PlanSaleOrder, self).write(values)
+
+    @api.model
+    def _cron_check_plan(self):
+        plans = self.env['plan.sale.order'].search([])
+        for plan in plans:
+            if (Datetime.today() - plan.create_date).days >= 3:
+                if plan.state == 'process' or plan.state == 'new':
+                    plan.write({'state': 'reject'})
