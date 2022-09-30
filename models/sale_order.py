@@ -2,7 +2,7 @@ from odoo import fields, models, api
 from odoo.exceptions import ValidationError
 
 
-class SaleOrderInherit(models.Model):
+class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
     plan_id = fields.Many2one('plan.sale.order', string='Business plan')
@@ -37,7 +37,7 @@ class SaleOrderInherit(models.Model):
             raise ValidationError("Wrong plan!")
         if self.plan_id.state != 'approved':
             raise ValidationError("Plan not approved!")
-        cash = super(SaleOrderInherit, self).action_confirm()
+        cash = super(SaleOrder, self).action_confirm()
 
         return cash
 

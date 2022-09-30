@@ -78,20 +78,9 @@
                 <field name="order_id"/>
                 <field name="name"/>
                 <field name="create_uid"/>
-                <field name="state"/>
+                <field name="state" widget="badge" decoration-success="state == 'approved'"
+                       decoration-info="state == 'process'" decoration-danger="state == 'reject'"/>
             </tree>
         </field>
     </record>
-
-    <record model="ir.cron" id="check_plan_cron">
-        <field name="name">Check plan daily</field>
-        <field name="model_id" ref="odoo_test_3.model_plan_sale_order"/>
-        <field name="state">code</field>
-        <field name="code">model._cron_check_plan()</field>
-        <field name="user_id" ref="base.user_root"/>
-        <field name="interval_number">1</field>
-        <field name="interval_type">days</field>
-        <field name="numbercall">-1</field>
-    </record>
-
 </odoo>

@@ -14,7 +14,8 @@ Description related to library.
     'data': ['security/ir.model.access.csv',
              'views/plan_sale_order_view.xml',
              'views/sale_order.xml',
-             'views/cron_plan_sale_order.xml'
+             'views/cron_plan_sale_order.xml',
+             'views/res_config_settings_view.xml'
              ],
     'demo': ['data/demo.xml'],
 }

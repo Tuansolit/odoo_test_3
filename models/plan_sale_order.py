@@ -34,7 +34,7 @@ class PlanSaleOrder(models.Model):
             for line in rec.plan_line:
                 self.env['mail.activity'].create({
                     'summary': 'Check plan',
-                    'date_deadline': date.today() + timedelta(days=3),
+                    'date_deadline': date.today() + timedelta(days=int(self.env['ir.config_parameter'].get_param('base.activity_days'))),
                     'activity_type_id': self.env.ref('mail.mail_activity_data_email').id,
                     'user_id': line.user_id.id,
                     'res_model_id': self.env['ir.model']._get_id('plan.sale.order'),
@@ -56,6 +56,7 @@ class PlanSaleOrder(models.Model):
     def _cron_check_plan(self):
         plans = self.env['plan.sale.order'].search([])
         for plan in plans:
-            if (Datetime.today() - plan.create_date).days >= 3:
+            if (Datetime.today() - plan.create_date).days >= int(self.env['ir.config_parameter'].get_param('base.activity_days')):
                 if plan.state == 'process' or plan.state == 'new':
                     plan.write({'state': 'reject'})
+
