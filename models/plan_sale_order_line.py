@@ -34,7 +34,7 @@ class PlanSaleOrderLine(models.Model):
                 break
         if x:
             self.plan_id.write({'state': 'approved'})
-            self.plan_id.order_id.write({'state': 'sale'})
+            self.plan_id.order_id._action_confirm()
         # for line in self.plan_id.plan_line:
         #     if line.state_plan == 'reject':
         #         s += 1
@@ -64,7 +64,7 @@ class PlanSaleOrderLine(models.Model):
                 break
         if x:
             self.plan_id.write({'state': 'reject'})
-            self.plan_id.order_id.write({'state': 'draft'})
+            # self.plan_id.order_id.write({'state': 'draft'})
 
     def compute_check_user(self):
         for rec in self:

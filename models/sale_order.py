@@ -28,7 +28,7 @@ class SaleOrder(models.Model):
     #     if not plan_id:
     #         raise ValidationError("No business plan!")
 
-    @api.model
+
     def action_confirm(self):
         # self.plan_id = self.env['plan.sale.order'].search([('order_id', '=', self.id)])
         if not self.plan_id:

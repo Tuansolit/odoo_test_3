@@ -6,8 +6,9 @@ class ResConfigSettings(models.TransientModel):
     _inherit = 'res.config.settings'
 
     activity_days = fields.Integer("Days", config_parameter='base.activity_days', default="3")
+    _sql_constraints = [('check_days', 'CHECK(activity_days > 0)', 'Check value:))')]
 
-    @api.constrains('activity_days')
-    def _check_values(self):
-        if self.activity_days <= 0:
-            raise ValidationError('Values wrong.')
+    # @api.constrains('activity_days')
+    # def _check_values(self):
+    #     if self.activity_days <= 0:
+    #         raise ValidationError('Values wrong.')
