@@ -1,14 +1,14 @@
 from odoo import fields, models, api
 
 
-class TeamSaleR(models.TransientModel):
+class TeamSaleRp(models.TransientModel):
     _name = 'team.sale.rp'
     _description = 'Description'
 
     team_id = fields.Many2one('crm.team')
     sale_target = fields.Float(compute='compute_sale_target')
     actual_sale = fields.Float(compute='_compute_actual_sale')
-    target_assessment_id = fields.Many2one('target.assessment.report', ondelete='cascade', index=True)
+    target_assessment_id = fields.Many2one('target.assessment.report')
     months = fields.Char()
 
     def _compute_actual_sale(self):

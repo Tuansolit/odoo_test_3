@@ -1,5 +1,5 @@
 from odoo import fields, models, api
-from datetime import datetime, date
+from datetime import datetime
 
 
 class TargetAssessmentReport(models.TransientModel):
