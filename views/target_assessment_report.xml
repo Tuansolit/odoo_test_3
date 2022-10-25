@@ -44,4 +44,41 @@
               action="action_target_assessment_report"/>
 
 
+    <record id="team_sale_rp_tree_view" model="ir.ui.view">
+        <field name="name">team.sale.report.tree</field>
+        <field name="model">target.assessment.report</field>
+        <field name="arch" type="xml">
+            <form string="Report">
+                <sheet>
+                    <field
+                            name="report_ids"
+                            widget="one2many"
+                            mode="tree"
+                    >
+                        <tree
+                                string="Sales Order Lines"
+                                editable="bottom"
+                        >
+                            <field name="team_id"/>
+                            <field name="actual_sale"/>
+                            <field name="sale_target"/>
+                        </tree>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="team_sale_rp_act_window" model="ir.actions.act_window">
+        <field name="name">Team report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">target.assessment.report</field>
+        <field name="view_mode">form</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('team_sale_rp_tree_view')})]"
+        />
+    </record>
+
+
 </odoo>

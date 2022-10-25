@@ -22,7 +22,6 @@ Description related to library.
              'views/sale_team.xml',
              'views/crm_lead_views.xml',
              'views/detailed_report.xml',
-             'views/team_sale_rp.xml',
              'views/target_assessment_report.xml'
              ],
     'demo': ['data/demo.xml'],

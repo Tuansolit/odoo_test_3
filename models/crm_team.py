@@ -2,7 +2,7 @@ from odoo import fields, models, api
 from odoo.exceptions import ValidationError
 
 
-class ModelName(models.Model):
+class CRMTeam(models.Model):
     _inherit = 'crm.team'
     _description = 'Description'
 

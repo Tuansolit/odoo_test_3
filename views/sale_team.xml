@@ -1,7 +1,7 @@
 <odoo>
     <!-- Inherit Form View to Modify it -->
     <record id="odoo_test_3_sale_team_view_form" model="ir.ui.view">
-        <field name="name">DAmn</field>
+        <field name="name">sale team view</field>
         <field name="model">crm.team</field>
         <field name="inherit_id" ref="sales_team.crm_team_view_form"/>
         <field name="arch" type="xml">
