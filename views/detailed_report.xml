@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="detailed_report_form_view" model="ir.ui.view">
+        <field name="name">detailed_report_form</field>
+        <field name="model">detailed.report</field>
+        <field name="arch" type="xml">
+            <form string="Detailed Report">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="months"/>
+                        </group>
+                        <group>
+                            <field name="team_id"/>
+                        </group>
+                    </group>
+                    <button string="Export Data"
+                            name="action_view_report" type="object"
+                            class="oe_stat_button"
+                            icon="fa-pencil-square-o">
+
+                    </button>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="detailed_report_act_window" model="ir.actions.act_window">
+        <field name="name">detailed.report.act.window</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">detailed.report</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="detailed_report_menu"
+              parent="crm.crm_menu_root"
+              action="action_detailed_report"/>
+    <act_window id="action_detailed_report" name="Detailed Report" res_model="detailed.report" view_mode="form"
+                target="new"/>
+
+</odoo>

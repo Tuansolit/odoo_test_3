@@ -28,7 +28,6 @@ class SaleOrder(models.Model):
     #     if not plan_id:
     #         raise ValidationError("No business plan!")
 
-
     def action_confirm(self):
         # self.plan_id = self.env['plan.sale.order'].search([('order_id', '=', self.id)])
         if not self.plan_id:
@@ -45,19 +44,15 @@ class SaleOrder(models.Model):
         plans = self.env['plan.sale.order'].search([('order_id', '=', self.id)])
         # plans = self.mapped('plan_id')
         action = self.env["ir.actions.actions"]._for_xml_id("odoo_test_3.test_3_plan_display_action")
-        # if len(plans) > 1:
-        action['domain'] = [('id', 'in', plans.ids)]
-        # elif len(plans) == 1:
-        #     form_view = [(self.env.ref('odoo_test_3.test_3_plan_view_tree').id, 'tree')]
-        #     action['domain'] = [('order_id', '=', self.id)]
-        #     # if 'views' in action:
-        #     #     action['views'] = form_view + [(state, view) for state, view in action['views'] if view != 'form']
-        #     # else:
-        #     action['views'] = form_view
-            # action['res_id'] = plans.id
-        # else:
-            # action = {'type': 'ir.actions.act_window_close'}
-
+        if len(plans) > 1:
+            action['domain'] = [('id', 'in', plans.ids)]
+        elif len(plans) == 1:
+            form_view = [(self.env.ref('odoo_test_3.test_3_business_plan_form').id, 'form')]
+            if 'views' in action:
+                action['views'] = form_view + [(state, view) for state, view in action['views'] if view != 'form']
+            else:
+                action['views'] = form_view
+            action['res_id'] = plans.id
         context = {
             'default_move_type': 'out_plan',
         }
@@ -68,3 +63,6 @@ class SaleOrder(models.Model):
         for order in self:
             plans = self.env['plan.sale.order'].search([('order_id', '=', self.id)])
             order.plan_count = len(plans)
+    #
+    # def _get_department_id(self):
+    #     dep_id = self.env.ref('odoo_test_3.department_1').id

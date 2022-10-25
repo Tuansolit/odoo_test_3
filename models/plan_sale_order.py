@@ -34,7 +34,8 @@ class PlanSaleOrder(models.Model):
             for line in rec.plan_line:
                 self.env['mail.activity'].create({
                     'summary': 'Check plan',
-                    'date_deadline': date.today() + timedelta(days=int(self.env['ir.config_parameter'].get_param('base.activity_days'))),
+                    'date_deadline': date.today() + timedelta(
+                        days=int(self.env['ir.config_parameter'].get_param('base.activity_days'))),
                     'activity_type_id': self.env.ref('mail.mail_activity_data_email').id,
                     'user_id': line.user_id.id,
                     'res_model_id': self.env['ir.model']._get_id('plan.sale.order'),
@@ -56,7 +57,19 @@ class PlanSaleOrder(models.Model):
     def _cron_check_plan(self):
         plans = self.env['plan.sale.order'].search([])
         for plan in plans:
-            if (Datetime.today() - plan.create_date).days >= int(self.env['ir.config_parameter'].get_param('base.activity_days')):
+            if (Datetime.today() - plan.create_date).days >= int(
+                    self.env['ir.config_parameter'].get_param('base.activity_days')):
                 if plan.state == 'process' or plan.state == 'new':
                     plan.write({'state': 'reject'})
 
+    # @api.model
+    # def create(self, vals):
+    #     res = super(PlanSaleOrder, self).create(vals)
+    #     dep_id = self.env.ref('odoo_test_3.department_1')
+    #     res.write({'plan_line': [(0, 0, {'user_id': member.id}) for member in dep_id.member_ids]})
+    #     return res
+    #
+    # def re_assign(self):
+    #     dep_id = self.env.ref('hr.dep_sales')
+    #     self.write({'plan_line': [(5, 0)] + [(0, 0, {'user_id': member.id}) for member in dep_id.member_ids]})
+    #

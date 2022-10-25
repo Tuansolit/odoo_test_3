@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="target_assessment_report_form_view" model="ir.ui.view">
+        <field name="name">target_assessment_report_form</field>
+        <field name="model">target.assessment.report</field>
+        <field name="arch" type="xml">
+            <form string=" Report">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="months"/>
+                        </group>
+                        <group>
+                            <field name="team_id" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                    <button string="Export Data"
+                            name="action_view_report" type="object"
+                            class="oe_stat_button"
+                            icon="fa-pencil-square-o">
+
+                    </button>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="target_assessment_report_act_window" model="ir.actions.act_window">
+        <field name="name">target.assessment.report.act.window</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">target.assessment.report</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <act_window id="action_target_assessment_report" name="Target Assessment Report"
+                res_model="target.assessment.report" view_mode="form"
+                target="new"/>
+    <menuitem id="target_assessment_report_menu"
+              parent="crm.crm_menu_root"
+              action="action_target_assessment_report"/>
+
+
+</odoo>

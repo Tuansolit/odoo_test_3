@@ -1,0 +1,39 @@
+<odoo>
+    <!-- Inherit Form View to Modify it -->
+    <record id="odoo_test_3_crm_lead_view_form" model="ir.ui.view">
+        <field name="name">dipshit</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//sheet//group//group//field[@name='team_id']" position="after">
+                <field name="quotation_count" invisible="1"/>
+                <field name="minimum_sales" attrs="{'readonly': [('quotation_count', '>', 0)]}"/>
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="odoo_test_3_crm_lead_view_tree" model="ir.ui.view">
+        <field name="name">odoo_test_3_crm_lead_view_tree</field>
+        <field name="model">crm.lead</field>
+        <field name="arch" type="xml">
+            <tree string="odoo_test_3_crm_lead_tree">
+                <field name="name"/>
+                <field name="user_id"/>
+                <field name="team_id"/>
+                <field name="minimum_sales"/>
+                <field name="create_date"/>
+                <field name="sale_amount_total"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id='odoo_test_3_report_display_action' model='ir.actions.act_window'>
+        <field name="name">Oppo</field>
+        <field name="res_model">crm.lead</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="odoo_test_3_crm_lead_view_tree"/>
+    </record>
+
+</odoo>

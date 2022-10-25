@@ -1,4 +1,7 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 acl_plan_sale_order,access_plan_sale_order,model_plan_sale_order,base.group_user,1,1,1,1
 acl_plan_sale_order_line,access_plan_sale_order_line,model_plan_sale_order_line,base.group_user,1,1,1,1
-
+acl_crm_lead,access_crm_lead,crm.model_crm_lead,odoo_test_3.truong_phong_group_user,1,1,1,1
+acl_detailed_report,access_detailed_report,model_detailed_report,base.group_user,1,1,1,1
+acl_target_assessment_report,access_target_assessment_report,model_target_assessment_report,base.group_user,1,1,1,1
+acl_team_sale_rp,access_team_sale_rp,model_team_sale_rp,base.group_user,1,1,1,1

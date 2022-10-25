@@ -1,0 +1,9 @@
+<odoo>
+
+    <data>
+        <record id="department_1" model="hr.department">
+            <field name="name">Phòng ban quản lý</field>
+        </record>
+    </data>
+
+</odoo>

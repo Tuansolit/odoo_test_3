@@ -1,0 +1,52 @@
+<odoo>
+    <!-- Inherit Form View to Modify it -->
+    <record id="odoo_test_3_sale_team_view_form" model="ir.ui.view">
+        <field name="name">DAmn</field>
+        <field name="model">crm.team</field>
+        <field name="inherit_id" ref="sales_team.crm_team_view_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//form//sheet//notebook" position="inside">
+                <page string="Monthly Target" name="months_lines" groups="odoo_test_3.truong_phong_group_user">
+                    <group>
+                        <field name="Jan_target" widget="monetary"/>
+                    </group>
+                    <group>
+                        <field name="Feb_target" widget="monetary"/>
+                    </group>
+                    <group>
+                        <field name="Mar_target" widget="monetary"/>
+                    </group>
+                    <group>
+                        <field name="Apr_target" widget="monetary"/>
+                    </group>
+                    <group>
+                        <field name="May_target" widget="monetary"/>
+                    </group>
+                    <group>
+                        <field name="Jun_target" widget="monetary"/>
+                    </group>
+                    <group>
+                        <field name="Jul_target" widget="monetary"/>
+                    </group>
+                    <group>
+                        <field name="Aug_target" widget="monetary"/>
+                    </group>
+                    <group>
+                        <field name="Sep_target" widget="monetary"/>
+                    </group>
+                    <group>
+                        <field name="Oct_target" widget="monetary"/>
+                    </group>
+                    <group>
+                        <field name="Nov_target" widget="monetary"/>
+                    </group>
+                    <group>
+                        <field name="Dec_target" widget="monetary"/>
+                    </group>
+                </page>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>
